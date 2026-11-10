@@ -1,0 +1,41 @@
+# Laboratorio CouchDB — giornata 1, Lab 1 e Lab 2
+# Due nodi CouchDB indipendenti, A e B, sulla stessa rete interna.
+#
+#   docker compose up -d      accende i due nodi
+#   docker compose ps         li elenca
+#   docker compose down       li spegne (i dati restano nei volumi)
+#
+# Utente e password: admin / password. È un laboratorio, non un sistema vero.
+#
+# I database di sistema (_users, _replicator) non servono ai laboratori: Fauxton
+# mostra un avviso sulla configurazione del nodo, e lo si ignora.
+
+name: flotta
+
+services:
+
+  couch-a:
+    image: couchdb:3
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: password
+    ports:
+      - "5984:5984"            # A risponde dal portatile su localhost:5984
+    volumes:
+      - dati-a:/opt/couchdb/data
+
+  couch-b:
+    image: couchdb:3
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: password
+    # Lab 2: togliete il cancelletto dalle due righe qui sotto,
+    # salvate e rilanciate  docker compose up -d
+    # ports:
+    #   - "5985:5984"
+    volumes:
+      - dati-b:/opt/couchdb/data
+
+volumes:
+  dati-a:
+  dati-b:
