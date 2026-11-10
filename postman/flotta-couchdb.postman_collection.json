@@ -1,0 +1,1438 @@
+{
+	"info": {
+		"_postman_id": "8d79be57-16a9-5603-9304-bdff9d71c375",
+		"name": "Flotta - Laboratorio CouchDB",
+		"description": "Architetture Cloud · ITS 2026-2027 · MVLabs\n\nLe richieste di tutti i laboratori, nell’ordine delle slide. L’autenticazione (Basic Auth, admin / password) è impostata sulla collection: ogni richiesta la eredita.\n\nVariabili: A = nodo A (5984), B = nodo B (5985), C1 e C3 = nodi del cluster (5991, 5993).\n\nDove trovate INCOLLA_LA_REV va la _rev vera, copiata dalla risposta precedente.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Lab 1 · Il primo container",
+			"item": [
+				{
+					"name": "1 · CouchDB risponde",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Lezione 1, Lab 1. Risposta attesa: 200 e \"Welcome\"."
+					},
+					"response": []
+				},
+				{
+					"name": "2 · Creiamo il database flotta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta"
+							]
+						},
+						"description": "Lezione 1, Lab 1. Risposta attesa: 201."
+					},
+					"response": []
+				},
+				{
+					"name": "3 · Creiamo auto-001",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/auto-001",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"auto-001"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipo\": \"auto\",\n  \"targa\": \"AB123CD\",\n  \"stato\": \"libera\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "Lezione 1, Lab 1. Risposta attesa: 201 con la prima _rev."
+					},
+					"response": []
+				},
+				{
+					"name": "4 · Rileggiamo auto-001",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/auto-001",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"auto-001"
+							]
+						},
+						"description": "Lezione 1, Lab 1. Tornano _id e _rev oltre ai nostri tre campi. Rimandatela dopo docker compose down e up: il documento c’è ancora."
+					},
+					"response": []
+				}
+			],
+			"description": "Giornata 1, mattina. Nel Lab 1 le richieste si costruiscono a mano per imparare Postman: queste servono a chi deve rifare il laboratorio."
+		},
+		{
+			"name": "Lab 3 · Cache",
+			"item": [
+				{
+					"name": "1 · Gli header di un giornale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.repubblica.it",
+							"protocol": "https",
+							"host": [
+								"www",
+								"repubblica",
+								"it"
+							],
+							"path": []
+						},
+						"auth": {
+							"type": "noauth"
+						},
+						"description": "Lezione 2, slide 34. Scheda Headers della risposta: cache-control, etag, age. Mandatela due volte. Provate anche un sito con il login, a scelta."
+					},
+					"response": []
+				},
+				{
+					"name": "2 · Gli header di wikipedia.org",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://www.wikipedia.org",
+							"protocol": "https",
+							"host": [
+								"www",
+								"wikipedia",
+								"org"
+							],
+							"path": []
+						},
+						"auth": {
+							"type": "noauth"
+						},
+						"description": "Lezione 2, slide 34."
+					},
+					"response": []
+				},
+				{
+					"name": "3 · L’impronta di auto-001 (ETag)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/auto-001",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"auto-001"
+							]
+						},
+						"description": "Lezione 2, slide 35. L’header ETag è uguale alla _rev."
+					},
+					"response": []
+				},
+				{
+					"name": "4 · È cambiato? (If-None-Match)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "If-None-Match",
+								"value": "\"INCOLLA_LA_REV\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{A}}/flotta/auto-001",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"auto-001"
+							]
+						},
+						"description": "Lezione 2, slide 36. Nell’header va la _rev tra virgolette, come compare nell’ETag. Risposta attesa: 304, corpo vuoto. Al posto di INCOLLA_LA_REV va la _rev vera, copiata dalla risposta della richiesta precedente (tutta, non solo le prime cifre)."
+					},
+					"response": []
+				},
+				{
+					"name": "5 · Cambiamo auto-001",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/auto-001",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"auto-001"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"_rev\": \"INCOLLA_LA_REV\",\n  \"tipo\": \"auto\",\n  \"targa\": \"AB123CD\",\n  \"stato\": \"in_uso\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "Lezione 2, slide 37. Risposta attesa: 201 e una _rev che inizia per 2-. Al posto di INCOLLA_LA_REV va la _rev vera, copiata dalla risposta della richiesta precedente (tutta, non solo le prime cifre)."
+					},
+					"response": []
+				},
+				{
+					"name": "6 · Con la vecchia impronta",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "If-None-Match",
+								"value": "\"INCOLLA_LA_REV\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{A}}/flotta/auto-001",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"auto-001"
+							]
+						},
+						"description": "Lezione 2, slide 37. Rimandiamo la richiesta 4 con la vecchia _rev: ora la risposta è 200 con un ETag nuovo."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab 4 · Documentale",
+			"item": [
+				{
+					"name": "1 · I nostri aggregati (da completare)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/_bulk_docs",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"_bulk_docs"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"docs\": [\n    {\n      \"_id\": \"cliente-c-77\",\n      \"tipo\": \"cliente\",\n      \"nome\": \"DA_COMPLETARE\"\n    },\n    {\n      \"_id\": \"auto-101\",\n      \"tipo\": \"auto\",\n      \"targa\": \"DA_COMPLETARE\"\n    },\n    {\n      \"_id\": \"noleggio-2001\",\n      \"tipo\": \"noleggio\",\n      \"cliente\": \"cliente-c-77\",\n      \"auto\": \"auto-101\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "Lezione 2, slide 64. Uno scheletro: sostituite DA_COMPLETARE e aggiungete i campi del vostro progetto. Almeno due clienti, due auto e due noleggi."
+					},
+					"response": []
+				},
+				{
+					"name": "2 · Cercare per contenuto: un esempio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/_find",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"_find"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"selector\": {\n    \"tipo\": \"cliente\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "Lezione 2, slide 65. Tornano i nostri clienti, con il warning sull’indice mancante."
+					},
+					"response": []
+				},
+				{
+					"name": "3 · Tocca a noi: la nostra ricerca",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/_find",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"_find"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"selector\": {\n    \"tipo\": \"auto\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "Lezione 2, slide 66. Cambiate solo il selector: le auto libere, i noleggi di un cliente, le auto con la batteria sotto il 30%. Operatori: $eq, $gt, $lt, $in, $exists."
+					},
+					"response": []
+				},
+				{
+					"name": "4 · Un documento sbagliato",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/auto-004",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"auto-004"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipo\": \"auto\",\n  \"Targa\": \"ab 123 cd\",\n  \"stato\": \"libbera\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "Lezione 2, slide 68. Risposta 201: CouchDB lo accetta. Lo schema lo deve garantire l’applicazione."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab 5 · Master-slave",
+			"item": [
+				{
+					"name": "1 · Replichiamo A verso B",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/_replicate",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"_replicate"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"source\": \"http://admin:password@couch-a:5984/flotta\",\n  \"target\": \"http://admin:password@couch-b:5984/flotta\",\n  \"create_target\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "Lezione 2, slide 87. Dentro il corpo i nodi si chiamano couch-a e couch-b: è la replica, dentro Docker, a usare quei nomi."
+					},
+					"response": []
+				},
+				{
+					"name": "2 · Su B ci sono gli stessi documenti",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{B}}/flotta/_all_docs",
+							"host": [
+								"{{B}}"
+							],
+							"path": [
+								"flotta",
+								"_all_docs"
+							]
+						},
+						"description": "Lezione 2, slide 88."
+					},
+					"response": []
+				},
+				{
+					"name": "3 · auto-001 su B",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{B}}/flotta/auto-001",
+							"host": [
+								"{{B}}"
+							],
+							"path": [
+								"flotta",
+								"auto-001"
+							]
+						},
+						"description": "Lezione 2, slide 88."
+					},
+					"response": []
+				},
+				{
+					"name": "4 · Scriviamo su B",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{B}}/flotta/auto-009",
+							"host": [
+								"{{B}}"
+							],
+							"path": [
+								"flotta",
+								"auto-009"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipo\": \"auto\",\n  \"targa\": \"ZZ999ZZ\",\n  \"stato\": \"libera\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"description": "Lezione 2, slide 89."
+					},
+					"response": []
+				},
+				{
+					"name": "5 · Su A auto-009 non c’è",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{A}}/flotta/auto-009",
+							"host": [
+								"{{A}}"
+							],
+							"path": [
+								"flotta",
+								"auto-009"
+							]
+						},
+						"description": "Lezione 2, slide 89. Risposta attesa: 404. La replica va in un verso solo."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lezione 3",
+			"item": [
+				{
+					"name": "Prima di partire",
+					"item": [
+						{
+							"name": "1 · auto-009 su B",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{B}}/flotta/auto-009",
+									"host": [
+										"{{B}}"
+									],
+									"path": [
+										"flotta",
+										"auto-009"
+									]
+								},
+								"description": "Lezione 3, slide 6."
+							},
+							"response": []
+						},
+						{
+							"name": "2 · auto-009 su A (404)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-009",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-009"
+									]
+								},
+								"description": "Lezione 3, slide 6."
+							},
+							"response": []
+						}
+					],
+					"description": "Prima: docker compose up -d nella cartella giornata1."
+				},
+				{
+					"name": "Passo 2 · Master-master",
+					"item": [
+						{
+							"name": "1 · Push: replichiamo B verso A (lanciata su B)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{B}}/_replicate",
+									"host": [
+										"{{B}}"
+									],
+									"path": [
+										"_replicate"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"source\": \"http://admin:password@couch-b:5984/flotta\",\n  \"target\": \"http://admin:password@couch-a:5984/flotta\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 10."
+							},
+							"response": []
+						},
+						{
+							"name": "2 · Ora auto-009 c’è anche su A",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-009",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-009"
+									]
+								},
+								"description": "Lezione 3, slide 10."
+							},
+							"response": []
+						},
+						{
+							"name": "3 · Un documento nuovo su B",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{B}}/flotta/auto-010",
+									"host": [
+										"{{B}}"
+									],
+									"path": [
+										"flotta",
+										"auto-010"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tipo\": \"auto\",\n  \"targa\": \"YY111YY\",\n  \"stato\": \"libera\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 15."
+							},
+							"response": []
+						},
+						{
+							"name": "4 · Pull: stessa direzione, lanciata su A",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/_replicate",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"_replicate"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"source\": \"http://admin:password@couch-b:5984/flotta\",\n  \"target\": \"http://admin:password@couch-a:5984/flotta\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 15."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Passo 3 · Conflitti",
+					"item": [
+						{
+							"name": "1 · Leggiamo auto-009",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-009",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-009"
+									]
+								},
+								"description": "Lezione 3, slide 19. Copiamo la _rev."
+							},
+							"response": []
+						},
+						{
+							"name": "2 · Prima modifica (201)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-009",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-009"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"_rev\": \"INCOLLA_LA_REV\",\n  \"tipo\": \"auto\",\n  \"targa\": \"ZZ999ZZ\",\n  \"stato\": \"in_uso\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 19. Al posto di INCOLLA_LA_REV va la _rev vera, copiata dalla risposta della richiesta precedente (tutta, non solo le prime cifre)."
+							},
+							"response": []
+						},
+						{
+							"name": "3 · Seconda modifica, stessa _rev (409)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-009",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-009"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"_rev\": \"INCOLLA_LA_REV\",\n  \"tipo\": \"auto\",\n  \"targa\": \"ZZ999ZZ\",\n  \"stato\": \"libera\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 19. Stessa _rev della richiesta 2: su un nodo solo il conflitto è rifiutato."
+							},
+							"response": []
+						},
+						{
+							"name": "4 · Mossa 1: A verso B",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/_replicate",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"_replicate"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"source\": \"http://admin:password@couch-a:5984/flotta\",\n  \"target\": \"http://admin:password@couch-b:5984/flotta\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 23."
+							},
+							"response": []
+						},
+						{
+							"name": "5 · Mossa 1: B verso A",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{B}}/_replicate",
+									"host": [
+										"{{B}}"
+									],
+									"path": [
+										"_replicate"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"source\": \"http://admin:password@couch-b:5984/flotta\",\n  \"target\": \"http://admin:password@couch-a:5984/flotta\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 23."
+							},
+							"response": []
+						},
+						{
+							"name": "6 · auto-001 su A",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-001",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									]
+								},
+								"description": "Lezione 3, slide 23. La _rev deve essere uguale su A e su B: copiamola."
+							},
+							"response": []
+						},
+						{
+							"name": "7 · auto-001 su B",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{B}}/flotta/auto-001",
+									"host": [
+										"{{B}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									]
+								},
+								"description": "Lezione 3, slide 23."
+							},
+							"response": []
+						},
+						{
+							"name": "8 · Mossa 3: scriviamo su A",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-001",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"_rev\": \"INCOLLA_LA_REV\",\n  \"tipo\": \"auto\",\n  \"targa\": \"AB123CD\",\n  \"stato\": \"libera\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 24. Al posto di INCOLLA_LA_REV va la _rev vera, copiata dalla risposta della richiesta precedente (tutta, non solo le prime cifre). Stessa _rev nelle richieste 8 e 9."
+							},
+							"response": []
+						},
+						{
+							"name": "9 · Mossa 3: scriviamo su B",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{B}}/flotta/auto-001",
+									"host": [
+										"{{B}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"_rev\": \"INCOLLA_LA_REV\",\n  \"tipo\": \"auto\",\n  \"targa\": \"AB123CD\",\n  \"stato\": \"in_manutenzione\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 24."
+							},
+							"response": []
+						},
+						{
+							"name": "10 · Mossa 4: dopo le repliche 4 e 5, una GET normale",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-001",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									]
+								},
+								"description": "Lezione 3, slide 25. Prima rimandiamo le richieste 4 e 5. Nessun errore, nessun avviso."
+							},
+							"response": []
+						},
+						{
+							"name": "11 · Chiediamo i conflitti",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-001?conflicts=true",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									],
+									"query": [
+										{
+											"key": "conflicts",
+											"value": "true"
+										}
+									]
+								},
+								"description": "Lezione 3, slide 26. Compare _conflicts con la revisione perdente."
+							},
+							"response": []
+						},
+						{
+							"name": "12 · Leggiamo la revisione perdente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-001?rev=INCOLLA_LA_REV_PERDENTE",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									],
+									"query": [
+										{
+											"key": "rev",
+											"value": "INCOLLA_LA_REV_PERDENTE"
+										}
+									]
+								},
+								"description": "Lezione 3, slide 26. Al posto di INCOLLA_LA_REV_PERDENTE va la revisione dentro _conflicts."
+							},
+							"response": []
+						},
+						{
+							"name": "13 · Risolviamo: la versione buona",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-001",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"_rev\": \"INCOLLA_LA_REV_VINCENTE\",\n  \"tipo\": \"auto\",\n  \"targa\": \"AB123CD\",\n  \"stato\": \"in_manutenzione\",\n  \"note\": \"fermo officina\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 29. Al posto di INCOLLA_LA_REV_VINCENTE va la _rev della richiesta 10."
+							},
+							"response": []
+						},
+						{
+							"name": "14 · Risolviamo: via il ramo perdente",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-001?rev=INCOLLA_LA_REV_PERDENTE",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									],
+									"query": [
+										{
+											"key": "rev",
+											"value": "INCOLLA_LA_REV_PERDENTE"
+										}
+									]
+								},
+								"description": "Lezione 3, slide 29. Al posto di INCOLLA_LA_REV_PERDENTE la revisione della richiesta 12."
+							},
+							"response": []
+						},
+						{
+							"name": "15 · Nessun conflitto rimasto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-001?conflicts=true",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-001"
+									],
+									"query": [
+										{
+											"key": "conflicts",
+											"value": "true"
+										}
+									]
+								},
+								"description": "Lezione 3, slide 29. _conflicts non c’è più."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Evitare i conflitti",
+					"item": [
+						{
+							"name": "1 · Replica filtrata: solo le auto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/_replicate",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"_replicate"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"source\": \"http://admin:password@couch-a:5984/flotta\",\n  \"target\": \"http://admin:password@couch-b:5984/flotta-auto\",\n  \"create_target\": true,\n  \"selector\": {\n    \"tipo\": \"auto\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 34."
+							},
+							"response": []
+						},
+						{
+							"name": "2 · Su B, in flotta-auto, solo auto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{B}}/flotta-auto/_all_docs",
+									"host": [
+										"{{B}}"
+									],
+									"path": [
+										"flotta-auto",
+										"_all_docs"
+									]
+								},
+								"description": "Lezione 3, slide 34."
+							},
+							"response": []
+						},
+						{
+							"name": "3 · L’anagrafica la scrive solo A",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-020-anagrafica",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-020-anagrafica"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tipo\": \"anagrafica\",\n  \"auto\": \"auto-020\",\n  \"targa\": \"TT020TT\",\n  \"modello\": \"Panda\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 37."
+							},
+							"response": []
+						},
+						{
+							"name": "4 · Lo stato lo scrive solo B",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{B}}/flotta/auto-020-stato",
+									"host": [
+										"{{B}}"
+									],
+									"path": [
+										"flotta",
+										"auto-020-stato"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tipo\": \"stato\",\n  \"auto\": \"auto-020\",\n  \"km\": 12034,\n  \"stato\": \"libera\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 37."
+							},
+							"response": []
+						},
+						{
+							"name": "5 · Dopo le repliche nei due sensi",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{A}}/flotta/auto-020-stato?conflicts=true",
+									"host": [
+										"{{A}}"
+									],
+									"path": [
+										"flotta",
+										"auto-020-stato"
+									],
+									"query": [
+										{
+											"key": "conflicts",
+											"value": "true"
+										}
+									]
+								},
+								"description": "Lezione 3, slide 37. Nessun _conflicts."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Passo 4 · Cluster",
+					"item": [
+						{
+							"name": "1 · couch-1 risponde",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										""
+									]
+								},
+								"description": "Lezione 3, slide 51. Prima: docker compose up -d nella cartella cluster."
+							},
+							"response": []
+						},
+						{
+							"name": "2 · Uniamo couch-2",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/_node/_local/_nodes/couchdb@couch-2.cluster",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"_node",
+										"_local",
+										"_nodes",
+										"couchdb@couch-2.cluster"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 52."
+							},
+							"response": []
+						},
+						{
+							"name": "3 · Uniamo couch-3",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/_node/_local/_nodes/couchdb@couch-3.cluster",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"_node",
+										"_local",
+										"_nodes",
+										"couchdb@couch-3.cluster"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 52."
+							},
+							"response": []
+						},
+						{
+							"name": "4 · Database di sistema: _users",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/_users",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"_users"
+									]
+								},
+								"description": "Lezione 3, slide 52."
+							},
+							"response": []
+						},
+						{
+							"name": "5 · Database di sistema: _replicator",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/_replicator",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"_replicator"
+									]
+								},
+								"description": "Lezione 3, slide 52."
+							},
+							"response": []
+						},
+						{
+							"name": "6 · Chi fa parte del cluster",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/_membership",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"_membership"
+									]
+								},
+								"description": "Lezione 3, slide 52."
+							},
+							"response": []
+						},
+						{
+							"name": "7 · Un database in due pezzi, tre copie",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/flotta?q=2&n=3",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"flotta"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "2"
+										},
+										{
+											"key": "n",
+											"value": "3"
+										}
+									]
+								},
+								"description": "Lezione 3, slide 53."
+							},
+							"response": []
+						},
+						{
+							"name": "8 · Dove stanno i pezzi",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/flotta/_shards",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"flotta",
+										"_shards"
+									]
+								},
+								"description": "Lezione 3, slide 53."
+							},
+							"response": []
+						},
+						{
+							"name": "9 · Con couch-3 spento: scriviamo",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/flotta/auto-002",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"flotta",
+										"auto-002"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tipo\": \"auto\",\n  \"stato\": \"libera\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 54. Prima: docker compose stop couch-3."
+							},
+							"response": []
+						},
+						{
+							"name": "10 · couch-3 riacceso: leggiamo da lui",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{C3}}/flotta/auto-002",
+									"host": [
+										"{{C3}}"
+									],
+									"path": [
+										"flotta",
+										"auto-002"
+									]
+								},
+								"description": "Lezione 3, slide 54. Prima: docker compose start couch-3."
+							},
+							"response": []
+						},
+						{
+							"name": "11 · Con due nodi spenti: 202",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{C1}}/flotta/auto-003",
+									"host": [
+										"{{C1}}"
+									],
+									"path": [
+										"flotta",
+										"auto-003"
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tipo\": \"auto\",\n  \"stato\": \"libera\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"description": "Lezione 3, slide 55. Prima: docker compose stop couch-2 couch-3. Poi riaccendiamoli."
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Giornata 2."
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "A",
+			"value": "http://localhost:5984",
+			"type": "string"
+		},
+		{
+			"key": "B",
+			"value": "http://localhost:5985",
+			"type": "string"
+		},
+		{
+			"key": "C1",
+			"value": "http://localhost:5991",
+			"type": "string"
+		},
+		{
+			"key": "C3",
+			"value": "http://localhost:5993",
+			"type": "string"
+		}
+	]
+}
