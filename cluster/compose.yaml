@@ -1,0 +1,58 @@
+# Laboratorio CouchDB — lezione 4, passo 4: un cluster di tre nodi
+# Si può tenere acceso insieme ai nodi A e B: usa porte diverse (5991-5993).
+#
+#   docker compose up -d
+#   docker compose stop couch-3     spegne un nodo
+#   docker compose start couch-3    lo riaccende
+#
+# I tre nodi condividono il "biscotto" (cookie) e il segreto: è così che
+# si riconoscono come parti dello stesso cluster.
+
+name: flotta-cluster
+
+services:
+
+  couch-1:
+    image: couchdb:3
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: password
+      COUCHDB_SECRET: segreto-del-laboratorio
+      COUCHDB_ERLANG_COOKIE: biscotto-della-flotta
+      NODENAME: couch-1.cluster
+    ports:
+      - "5991:5984"
+    networks:
+      cluster:
+        aliases: [couch-1.cluster]
+
+  couch-2:
+    image: couchdb:3
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: password
+      COUCHDB_SECRET: segreto-del-laboratorio
+      COUCHDB_ERLANG_COOKIE: biscotto-della-flotta
+      NODENAME: couch-2.cluster
+    ports:
+      - "5992:5984"
+    networks:
+      cluster:
+        aliases: [couch-2.cluster]
+
+  couch-3:
+    image: couchdb:3
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: password
+      COUCHDB_SECRET: segreto-del-laboratorio
+      COUCHDB_ERLANG_COOKIE: biscotto-della-flotta
+      NODENAME: couch-3.cluster
+    ports:
+      - "5993:5984"
+    networks:
+      cluster:
+        aliases: [couch-3.cluster]
+
+networks:
+  cluster:
