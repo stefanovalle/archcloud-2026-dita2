@@ -268,7 +268,7 @@
 								}
 							}
 						},
-						"description": "Lezione 2, slide 64. Uno scheletro: sostituite DA_COMPLETARE e aggiungete i campi del vostro progetto. Almeno due clienti, due auto e due noleggi."
+						"description": "Lezione 3, slide 11. Uno scheletro: sostituite DA_COMPLETARE e aggiungete i campi del vostro progetto. Almeno due clienti, due auto e due noleggi."
 					},
 					"response": []
 				},
@@ -296,7 +296,7 @@
 								}
 							}
 						},
-						"description": "Lezione 2, slide 65. Tornano i nostri clienti, con il warning sull’indice mancante."
+						"description": "Lezione 3, slide 12. Tornano i nostri clienti, con il warning sull’indice mancante."
 					},
 					"response": []
 				},
@@ -324,7 +324,7 @@
 								}
 							}
 						},
-						"description": "Lezione 2, slide 66. Cambiate solo il selector: le auto libere, i noleggi di un cliente, le auto con la batteria sotto il 30%. Operatori: $eq, $gt, $lt, $in, $exists."
+						"description": "Lezione 3, slide 13. Cambiate solo il selector: le auto libere, i noleggi di un cliente, le auto con la batteria sotto il 30%. Operatori: $eq, $gt, $lt, $in, $exists."
 					},
 					"response": []
 				},
@@ -352,7 +352,7 @@
 								}
 							}
 						},
-						"description": "Lezione 2, slide 68. Risposta 201: CouchDB lo accetta. Lo schema lo deve garantire l’applicazione."
+						"description": "Lezione 3, slide 15. Risposta 201: CouchDB lo accetta. Lo schema lo deve garantire l’applicazione."
 					},
 					"response": []
 				}
@@ -384,7 +384,7 @@
 								}
 							}
 						},
-						"description": "Lezione 2, slide 87. Dentro il corpo i nodi si chiamano couch-a e couch-b: è la replica, dentro Docker, a usare quei nomi."
+						"description": "Lezione 3, slide 34. Dentro il corpo i nodi si chiamano couch-a e couch-b: è la replica, dentro Docker, a usare quei nomi."
 					},
 					"response": []
 				},
@@ -403,7 +403,7 @@
 								"_all_docs"
 							]
 						},
-						"description": "Lezione 2, slide 88."
+						"description": "Lezione 3, slide 35."
 					},
 					"response": []
 				},
@@ -422,7 +422,7 @@
 								"auto-001"
 							]
 						},
-						"description": "Lezione 2, slide 88."
+						"description": "Lezione 3, slide 35."
 					},
 					"response": []
 				},
@@ -450,7 +450,7 @@
 								}
 							}
 						},
-						"description": "Lezione 2, slide 89."
+						"description": "Lezione 3, slide 36."
 					},
 					"response": []
 				},
@@ -469,14 +469,14 @@
 								"auto-009"
 							]
 						},
-						"description": "Lezione 2, slide 89. Risposta attesa: 404. La replica va in un verso solo."
+						"description": "Lezione 3, slide 36. Risposta attesa: 404. La replica va in un verso solo."
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "Lezione 3",
+			"name": "Lezione 4",
 			"item": [
 				{
 					"name": "Prima di partire",
@@ -496,7 +496,7 @@
 										"auto-009"
 									]
 								},
-								"description": "Lezione 3, slide 6."
+								"description": "Lezione 4, slide 6."
 							},
 							"response": []
 						},
@@ -515,7 +515,7 @@
 										"auto-009"
 									]
 								},
-								"description": "Lezione 3, slide 6."
+								"description": "Lezione 4, slide 6."
 							},
 							"response": []
 						}
@@ -548,7 +548,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 10."
+								"description": "Lezione 4, slide 10."
 							},
 							"response": []
 						},
@@ -567,7 +567,7 @@
 										"auto-009"
 									]
 								},
-								"description": "Lezione 3, slide 10."
+								"description": "Lezione 4, slide 10."
 							},
 							"response": []
 						},
@@ -595,7 +595,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 15."
+								"description": "Lezione 4, slide 15."
 							},
 							"response": []
 						},
@@ -622,7 +622,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 15."
+								"description": "Lezione 4, slide 15."
 							},
 							"response": []
 						}
@@ -646,7 +646,7 @@
 										"auto-009"
 									]
 								},
-								"description": "Lezione 3, slide 19. Copiamo la _rev."
+								"description": "Lezione 4, slide 19. Copiamo la _rev."
 							},
 							"response": []
 						},
@@ -674,7 +674,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 19. Al posto di INCOLLA_LA_REV va la _rev vera, copiata dalla risposta della richiesta precedente (tutta, non solo le prime cifre)."
+								"description": "Lezione 4, slide 19. Al posto di INCOLLA_LA_REV va la _rev vera, copiata dalla risposta della richiesta precedente (tutta, non solo le prime cifre)."
 							},
 							"response": []
 						},
@@ -702,7 +702,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 19. Stessa _rev della richiesta 2: su un nodo solo il conflitto è rifiutato."
+								"description": "Lezione 4, slide 19. Stessa _rev della richiesta 2: su un nodo solo il conflitto è rifiutato."
 							},
 							"response": []
 						},
@@ -729,7 +729,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 23."
+								"description": "Lezione 4, slide 23."
 							},
 							"response": []
 						},
@@ -756,7 +756,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 23."
+								"description": "Lezione 4, slide 23."
 							},
 							"response": []
 						},
@@ -775,7 +775,7 @@
 										"auto-001"
 									]
 								},
-								"description": "Lezione 3, slide 23. La _rev deve essere uguale su A e su B: copiamola."
+								"description": "Lezione 4, slide 23. La _rev deve essere uguale su A e su B: copiamola."
 							},
 							"response": []
 						},
@@ -794,7 +794,7 @@
 										"auto-001"
 									]
 								},
-								"description": "Lezione 3, slide 23."
+								"description": "Lezione 4, slide 23."
 							},
 							"response": []
 						},
@@ -822,7 +822,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 24. Al posto di INCOLLA_LA_REV va la _rev vera, copiata dalla risposta della richiesta precedente (tutta, non solo le prime cifre). Stessa _rev nelle richieste 8 e 9."
+								"description": "Lezione 4, slide 24. Al posto di INCOLLA_LA_REV va la _rev vera, copiata dalla risposta della richiesta precedente (tutta, non solo le prime cifre). Stessa _rev nelle richieste 8 e 9."
 							},
 							"response": []
 						},
@@ -850,7 +850,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 24."
+								"description": "Lezione 4, slide 24."
 							},
 							"response": []
 						},
@@ -869,7 +869,7 @@
 										"auto-001"
 									]
 								},
-								"description": "Lezione 3, slide 25. Prima rimandiamo le richieste 4 e 5. Nessun errore, nessun avviso."
+								"description": "Lezione 4, slide 25. Prima rimandiamo le richieste 4 e 5. Nessun errore, nessun avviso."
 							},
 							"response": []
 						},
@@ -894,7 +894,7 @@
 										}
 									]
 								},
-								"description": "Lezione 3, slide 26. Compare _conflicts con la revisione perdente."
+								"description": "Lezione 4, slide 26. Compare _conflicts con la revisione perdente."
 							},
 							"response": []
 						},
@@ -919,7 +919,7 @@
 										}
 									]
 								},
-								"description": "Lezione 3, slide 26. Al posto di INCOLLA_LA_REV_PERDENTE va la revisione dentro _conflicts."
+								"description": "Lezione 4, slide 26. Al posto di INCOLLA_LA_REV_PERDENTE va la revisione dentro _conflicts."
 							},
 							"response": []
 						},
@@ -947,7 +947,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 29. Al posto di INCOLLA_LA_REV_VINCENTE va la _rev della richiesta 10."
+								"description": "Lezione 4, slide 29. Al posto di INCOLLA_LA_REV_VINCENTE va la _rev della richiesta 10."
 							},
 							"response": []
 						},
@@ -972,7 +972,7 @@
 										}
 									]
 								},
-								"description": "Lezione 3, slide 29. Al posto di INCOLLA_LA_REV_PERDENTE la revisione della richiesta 12."
+								"description": "Lezione 4, slide 29. Al posto di INCOLLA_LA_REV_PERDENTE la revisione della richiesta 12."
 							},
 							"response": []
 						},
@@ -997,7 +997,7 @@
 										}
 									]
 								},
-								"description": "Lezione 3, slide 29. _conflicts non c’è più."
+								"description": "Lezione 4, slide 29. _conflicts non c’è più."
 							},
 							"response": []
 						}
@@ -1029,7 +1029,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 34."
+								"description": "Lezione 4, slide 34."
 							},
 							"response": []
 						},
@@ -1048,7 +1048,7 @@
 										"_all_docs"
 									]
 								},
-								"description": "Lezione 3, slide 34."
+								"description": "Lezione 4, slide 34."
 							},
 							"response": []
 						},
@@ -1076,7 +1076,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 37."
+								"description": "Lezione 4, slide 37."
 							},
 							"response": []
 						},
@@ -1104,7 +1104,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 37."
+								"description": "Lezione 4, slide 37."
 							},
 							"response": []
 						},
@@ -1129,7 +1129,7 @@
 										}
 									]
 								},
-								"description": "Lezione 3, slide 37. Nessun _conflicts."
+								"description": "Lezione 4, slide 37. Nessun _conflicts."
 							},
 							"response": []
 						}
@@ -1152,7 +1152,7 @@
 										""
 									]
 								},
-								"description": "Lezione 3, slide 51. Prima: docker compose up -d nella cartella cluster."
+								"description": "Lezione 4, slide 51. Prima: docker compose up -d nella cartella cluster."
 							},
 							"response": []
 						},
@@ -1182,7 +1182,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 52."
+								"description": "Lezione 4, slide 52."
 							},
 							"response": []
 						},
@@ -1212,7 +1212,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 52."
+								"description": "Lezione 4, slide 52."
 							},
 							"response": []
 						},
@@ -1230,7 +1230,7 @@
 										"_users"
 									]
 								},
-								"description": "Lezione 3, slide 52."
+								"description": "Lezione 4, slide 52."
 							},
 							"response": []
 						},
@@ -1248,7 +1248,7 @@
 										"_replicator"
 									]
 								},
-								"description": "Lezione 3, slide 52."
+								"description": "Lezione 4, slide 52."
 							},
 							"response": []
 						},
@@ -1266,7 +1266,7 @@
 										"_membership"
 									]
 								},
-								"description": "Lezione 3, slide 52."
+								"description": "Lezione 4, slide 52."
 							},
 							"response": []
 						},
@@ -1294,7 +1294,7 @@
 										}
 									]
 								},
-								"description": "Lezione 3, slide 53."
+								"description": "Lezione 4, slide 53."
 							},
 							"response": []
 						},
@@ -1313,7 +1313,7 @@
 										"_shards"
 									]
 								},
-								"description": "Lezione 3, slide 53."
+								"description": "Lezione 4, slide 53."
 							},
 							"response": []
 						},
@@ -1341,7 +1341,7 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 54. Prima: docker compose stop couch-3."
+								"description": "Lezione 4, slide 54. Prima: docker compose stop couch-3."
 							},
 							"response": []
 						},
@@ -1360,7 +1360,7 @@
 										"auto-002"
 									]
 								},
-								"description": "Lezione 3, slide 54. Prima: docker compose start couch-3."
+								"description": "Lezione 4, slide 54. Prima: docker compose start couch-3."
 							},
 							"response": []
 						},
@@ -1388,14 +1388,14 @@
 										}
 									}
 								},
-								"description": "Lezione 3, slide 55. Prima: docker compose stop couch-2 couch-3. Poi riaccendiamoli."
+								"description": "Lezione 4, slide 55. Prima: docker compose stop couch-2 couch-3. Poi riaccendiamoli."
 							},
 							"response": []
 						}
 					]
 				}
 			],
-			"description": "Giornata 2."
+			"description": "Lezione 4 (fino al 17 novembre 2026 era la lezione 3)."
 		}
 	],
 	"auth": {
