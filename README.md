@@ -28,6 +28,7 @@ Come nel corso Protocolli, ogni branch è un passo del corso e si parte da `main
 | `main` | **Giornata 1, Lab 1 e Lab 2.** `giornata1/compose.yaml`: due nodi CouchDB, A e B, dalla stessa immagine. A risponde su `localhost:5984`; B non ha porte pubblicate finché nel Lab 2 non le apriamo noi. |
 | `lab3` | **Giornata 1, dal Lab 3.** Parte da `main` e aggiunge `postman/flotta-couchdb.postman_collection.json`: la collection Postman con le richieste di tutti i laboratori, una cartella per laboratorio. |
 | `lab6` | **Lezione 3, Lab 6 e 7 su AWS.** Parte da `lab3` e aggiunge la cartella `aws/`: lo script di avvio delle istanze, il codice della funzione Lambda, la regola di IoT Core e i messaggi di prova. |
+| `lezione4` | **Lezione 4, passo 4.** Parte da `lab6` e aggiunge `cluster/compose.yaml`: tre nodi CouchDB sulle porte 5991, 5992 e 5993, che si riconoscono come parti dello stesso cluster. |
 
 I passi successivi arriveranno come nuovi branch.
 
@@ -83,3 +84,16 @@ Nella cartella `aws/` ci sono i file da copiare nella console di AWS, invece di 
 | `messaggio.json` | Lab 7: il messaggio da pubblicare dal client MQTT di prova |
 
 Ogni risorsa che creiamo su AWS comincia con il nostro cognome, e alla fine della lezione si cancella tutto, nell’ordine indicato sulle slide.
+
+## Il cluster (lezione 4, passo 4)
+
+```
+git pull
+git switch lezione4
+cd cluster
+docker compose up -d
+```
+
+Tre nodi nuovi, `couch-1`, `couch-2` e `couch-3`, sulle porte 5991, 5992 e 5993 (in Postman `{{C1}}` e `{{C3}}`). Possono restare accesi insieme ad A e B della cartella `giornata1`: usano porte diverse. Le richieste sono nella collection, cartella «Lezione 4 / Passo 4 · Cluster».
+
+Per spegnere un nodo e riaccenderlo: `docker compose stop couch-3` e `docker compose start couch-3`.
