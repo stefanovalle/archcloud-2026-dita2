@@ -29,6 +29,7 @@ Come nel corso Protocolli, ogni branch è un passo del corso e si parte da `main
 | `lab3` | **Giornata 1, dal Lab 3.** Parte da `main` e aggiunge `postman/flotta-couchdb.postman_collection.json`: la collection Postman con le richieste di tutti i laboratori, una cartella per laboratorio. |
 | `lab6` | **Lezione 3, Lab 6 e 7 su AWS.** Parte da `lab3` e aggiunge la cartella `aws/`: lo script di avvio delle istanze, il codice della funzione Lambda, la regola di IoT Core e i messaggi di prova. |
 | `lezione4` | **Lezione 4, passo 4.** Parte da `lab6` e aggiunge `cluster/compose.yaml`: tre nodi CouchDB sulle porte 5991, 5992 e 5993, che si riconoscono come parti dello stesso cluster. |
+| `lezione5` | **Lezione 5, Lab 8 su AWS.** Parte da `lezione4` e aggiunge `aws/fine-noleggio.json`: l’evento «fine noleggio» da pubblicare sul topic SNS. |
 
 I passi successivi arriveranno come nuovi branch.
 
@@ -97,3 +98,12 @@ docker compose up -d
 Tre nodi nuovi, `couch-1`, `couch-2` e `couch-3`, sulle porte 5991, 5992 e 5993 (in Postman `{{C1}}` e `{{C3}}`). Possono restare accesi insieme ad A e B della cartella `giornata1`: usano porte diverse. Le richieste sono nella collection, cartella «Lezione 4 / Passo 4 · Cluster».
 
 Per spegnere un nodo e riaccenderlo: `docker compose stop couch-3` e `docker compose start couch-3`.
+
+## L’evento «fine noleggio» (lezione 5, Lab 8)
+
+```
+git pull
+git switch lezione5
+```
+
+Il Lab 8 si fa tutto dalla console di AWS, senza codice: un topic SNS `rossi-fine-noleggio` e due code SQS iscritte, `rossi-fatturazione` e `rossi-manutenzione`, più la coda degli errori `rossi-manutenzione-errori` (al posto di `rossi`, il nostro cognome). Il messaggio da pubblicare (SNS → il nostro topic → Publish message) è in `aws/fine-noleggio.json`.
