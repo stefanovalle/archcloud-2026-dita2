@@ -869,7 +869,7 @@
 										"auto-001"
 									]
 								},
-								"description": "Lezione 4, slide 25. Prima rimandiamo le richieste 4 e 5. Nessun errore, nessun avviso."
+								"description": "Lezione 4, slide 26. Prima riattacchiamo (slide 25): rimandiamo le richieste 4 e 5, nei due sensi. Poi questa GET: nessun errore, nessun avviso."
 							},
 							"response": []
 						},
@@ -894,7 +894,7 @@
 										}
 									]
 								},
-								"description": "Lezione 4, slide 26. Compare _conflicts con la revisione perdente."
+								"description": "Lezione 4, slide 27. Compare _conflicts con la revisione perdente."
 							},
 							"response": []
 						},
@@ -919,7 +919,7 @@
 										}
 									]
 								},
-								"description": "Lezione 4, slide 26. Al posto di INCOLLA_LA_REV_PERDENTE va la revisione dentro _conflicts."
+								"description": "Lezione 4, slide 27. Al posto di INCOLLA_LA_REV_PERDENTE va la revisione dentro _conflicts."
 							},
 							"response": []
 						},
@@ -947,7 +947,7 @@
 										}
 									}
 								},
-								"description": "Lezione 4, slide 29. Al posto di INCOLLA_LA_REV_VINCENTE va la _rev della richiesta 10."
+								"description": "Lezione 4, slide 30. Al posto di INCOLLA_LA_REV_VINCENTE va la _rev della richiesta 10."
 							},
 							"response": []
 						},
@@ -972,7 +972,7 @@
 										}
 									]
 								},
-								"description": "Lezione 4, slide 29. Al posto di INCOLLA_LA_REV_PERDENTE la revisione della richiesta 12."
+								"description": "Lezione 4, slide 30. Al posto di INCOLLA_LA_REV_PERDENTE la revisione della richiesta 12."
 							},
 							"response": []
 						},
@@ -997,7 +997,7 @@
 										}
 									]
 								},
-								"description": "Lezione 4, slide 29. _conflicts non c’è più."
+								"description": "Lezione 4, slide 30. _conflicts non c’è più."
 							},
 							"response": []
 						}
@@ -1029,7 +1029,7 @@
 										}
 									}
 								},
-								"description": "Lezione 4, slide 34."
+								"description": "Lezione 4, slide 36."
 							},
 							"response": []
 						},
@@ -1048,7 +1048,7 @@
 										"_all_docs"
 									]
 								},
-								"description": "Lezione 4, slide 34."
+								"description": "Lezione 4, slide 36."
 							},
 							"response": []
 						},
@@ -1076,7 +1076,7 @@
 										}
 									}
 								},
-								"description": "Lezione 4, slide 37."
+								"description": "Lezione 4, slide 39."
 							},
 							"response": []
 						},
@@ -1104,7 +1104,7 @@
 										}
 									}
 								},
-								"description": "Lezione 4, slide 37."
+								"description": "Lezione 4, slide 39."
 							},
 							"response": []
 						},
@@ -1129,7 +1129,7 @@
 										}
 									]
 								},
-								"description": "Lezione 4, slide 37. Nessun _conflicts."
+								"description": "Lezione 4, slide 39. Nessun _conflicts."
 							},
 							"response": []
 						}
@@ -1152,7 +1152,7 @@
 										""
 									]
 								},
-								"description": "Lezione 4, slide 51. Prima: docker compose up -d nella cartella cluster."
+								"description": "Lezione 4, slide 54. Prima: docker compose up -d nella cartella cluster."
 							},
 							"response": []
 						},
@@ -1182,7 +1182,7 @@
 										}
 									}
 								},
-								"description": "Lezione 4, slide 52."
+								"description": "Lezione 4, slide 55."
 							},
 							"response": []
 						},
@@ -1212,7 +1212,7 @@
 										}
 									}
 								},
-								"description": "Lezione 4, slide 52."
+								"description": "Lezione 4, slide 55."
 							},
 							"response": []
 						},
@@ -1230,7 +1230,7 @@
 										"_users"
 									]
 								},
-								"description": "Lezione 4, slide 52."
+								"description": "Lezione 4, slide 55."
 							},
 							"response": []
 						},
@@ -1248,7 +1248,7 @@
 										"_replicator"
 									]
 								},
-								"description": "Lezione 4, slide 52."
+								"description": "Lezione 4, slide 55."
 							},
 							"response": []
 						},
@@ -1266,12 +1266,12 @@
 										"_membership"
 									]
 								},
-								"description": "Lezione 4, slide 52."
+								"description": "Lezione 4, slide 55."
 							},
 							"response": []
 						},
 						{
-							"name": "7 · Un database in due pezzi, tre copie",
+							"name": "7 · Un database in due partizioni, tre copie",
 							"request": {
 								"method": "PUT",
 								"header": [],
@@ -1294,12 +1294,12 @@
 										}
 									]
 								},
-								"description": "Lezione 4, slide 53."
+								"description": "Lezione 4, slide 56."
 							},
 							"response": []
 						},
 						{
-							"name": "8 · Dove stanno i pezzi",
+							"name": "8 · Dove stanno le partizioni",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -1313,7 +1313,7 @@
 										"_shards"
 									]
 								},
-								"description": "Lezione 4, slide 53."
+								"description": "Lezione 4, slide 56."
 							},
 							"response": []
 						},
@@ -1341,7 +1341,7 @@
 										}
 									}
 								},
-								"description": "Lezione 4, slide 54. Prima: docker compose stop couch-3."
+								"description": "Lezione 4, slide 57. Prima: docker compose stop couch-3."
 							},
 							"response": []
 						},
@@ -1360,7 +1360,7 @@
 										"auto-002"
 									]
 								},
-								"description": "Lezione 4, slide 54. Prima: docker compose start couch-3."
+								"description": "Lezione 4, slide 57. Prima: docker compose start couch-3."
 							},
 							"response": []
 						},
@@ -1388,7 +1388,7 @@
 										}
 									}
 								},
-								"description": "Lezione 4, slide 55. Prima: docker compose stop couch-2 couch-3. Poi riaccendiamoli."
+								"description": "Lezione 4, slide 58. Prima: docker compose stop couch-2 couch-3. Poi riaccendiamoli."
 							},
 							"response": []
 						}
