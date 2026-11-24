@@ -1,0 +1,10 @@
+{
+  "evento": "noleggio.finito",
+  "versione": 1,
+  "noleggio": "noleggio-1001",
+  "auto": "auto-001",
+  "cliente": "cliente-c-42",
+  "km": 37,
+  "importo": 11.60,
+  "anomalia": false
+}
